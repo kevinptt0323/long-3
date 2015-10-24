@@ -25,14 +25,6 @@
         "dist/jquery.min.map"
       ]
     },
-    "react": {
-      "main": [
-        "react.js",
-        "react.min.js",
-        "react-with-addons.js",
-        "react-with-addons.min.js"
-      ]
-    },
     "semantic": {
       "main": [
         "dist/semantic.min.css",
