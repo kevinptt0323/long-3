@@ -23,6 +23,7 @@
     "main-bower-files": "^2.9.0"
   },
   "dependencies": {
+    "browserify": "^11.2.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-highcharts": "^4.0.0",

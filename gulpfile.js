@@ -3,6 +3,8 @@ var gulp           = require('gulp'),
     less           = require('gulp-less'),
     changed        = require('gulp-changed'),
     react          = require('gulp-react'),
+    reactify       = require('reactify'),
+    browserify     = require('gulp-browserify'),
     mainBowerFiles = require('main-bower-files'),
     del            = require('del');
 
@@ -78,16 +80,35 @@ gulp.task('libs', ['libs-fonts'], function() {
     .pipe(gulp.dest(paths.lib.dest));
 });
 
+gulp.task('material-ui', function() {
+    return gulp.src('node_modules/material-ui/lib/**')
+      .pipe(changed('dist/lib/material-ui'))
+      .pipe(gulp.dest('dist/lib/material-ui'));
+});
+
 gulp.task('libs-fonts', function() {
   return gulp.src(paths.fonts.src, { base: './bower_components/semantic/src' })
     .pipe(changed(paths.fonts.dest))
     .pipe(gulp.dest(paths.fonts.dest));
 });
 
-gulp.task('static', ['libs-fonts'], function() {
+gulp.task('browserify', function() {
+  gulp.src('src/js/result.jsx')
+    .pipe(changed('dist/js'))
+    .pipe(react())
+    .pipe(browserify({
+      insertGlobals : true,
+      debug : !gulp.env.production,
+      transform: [reactify]
+    }))
+    .pipe(gulp.dest('dist/js'))
+  ;
+});
+
+gulp.task('static', function() {
   return gulp.src(paths.static.src)
     .pipe(changed(paths.static.dest))
     .pipe(gulp.dest(paths.static.dest));
 });
 
-gulp.task('default', ['web-pages', 'Javascript', 'React', 'Less', 'libs', 'libs-fonts', 'static']);
+gulp.task('default', ['web-pages', 'Javascript', 'React', 'Less', 'libs', 'libs-fonts', 'browserify', 'static']);
