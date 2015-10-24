@@ -9,6 +9,13 @@ function body($tall="170"){
     $array = array_map("str_getcsv", explode("\n", $csv));
     $array=array_slice($array,1,47);
 
+    $q_arr=array(
+        "tall"=>170,
+        "normal"=>60,
+        "overweight"=>70,
+        "obesity"=>80,
+    );
+
     foreach($array as $item){
         if($item[0]==$tall){
             $q_arr=array(

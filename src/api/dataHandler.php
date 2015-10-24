@@ -6,7 +6,7 @@ function genResult($in){
 
     #default
     $std_height=body($in['height']);
-    if($in['weight']>$std_height['normal']){
+    if($in['weight']>$std_height['overweight']){
         $warn=$in['weight']."的你超重囉";
     }else $warn="恭喜你體重很標準";
 
@@ -20,7 +20,7 @@ function genResult($in){
         $result['wine']="你喝".$in['wine']."公升/日好像有點多…";
     }
     if($in['sleep']<8.7){
-        $result['wine']="每天只睡".$in['sleep']."小時太少了";
+        $result['sleep']="每天只睡".$in['sleep']."小時太少了";
     }
     $_SESSION['result']=json_encode($result);
 }
