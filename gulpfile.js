@@ -12,11 +12,11 @@ var paths = {
     dest: './dist'
   },
   js: {
-    src: './src/js/*.js',
+    src: './src/js/**/*.js',
     dest: './dist/js'
   },
   jsx: {
-    src: './src/js/*.jsx',
+    src: './src/js/**/*.jsx',
     dest: './dist/js'
   },
   less: {
