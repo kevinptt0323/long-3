@@ -35,6 +35,10 @@ var paths = {
   fonts: {
     src: 'bower_components/semantic/src/themes/default/**',
     dest: './dist/lib'
+  },
+  static: {
+    src: './src/static/*',
+    dest: './dist/static'
   }
 };
 
@@ -80,4 +84,10 @@ gulp.task('libs-fonts', function() {
     .pipe(gulp.dest(paths.fonts.dest));
 });
 
-gulp.task('default', ['web-pages', 'Javascript', 'React', 'Less', 'libs', 'libs-fonts']);
+gulp.task('static', ['libs-fonts'], function() {
+  return gulp.src(paths.static.src)
+    .pipe(changed(paths.static.dest))
+    .pipe(gulp.dest(paths.static.dest));
+});
+
+gulp.task('default', ['web-pages', 'Javascript', 'React', 'Less', 'libs', 'libs-fonts', 'static']);
