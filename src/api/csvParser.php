@@ -125,6 +125,6 @@ function regular_exer($gender="male"){
 
 }
 
-body();
+body("160");
 
 ?>

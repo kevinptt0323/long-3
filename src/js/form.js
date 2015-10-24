@@ -30,7 +30,7 @@ $(document).ready( function(){
 		$.ajax({
 			type: "POST",
 			url: "api/dataHandler.php",
-			data: form,
+			data: JSON.stringify(form),
 			dataType: "json",
 			timeout: 10000,
 			success: function(res) {
