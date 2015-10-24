@@ -63,7 +63,7 @@ gulp.task('Less', function() {
     .pipe(gulp.dest(paths.less.dest));
 });
 
-gulp.task('libs', ['libs-fonts'], function() {
+gulp.task('libs', ['libs-fonts', 'material-ui'], function() {
   return gulp.src(paths.lib.src)
     .pipe(changed(paths.lib.dest))
     .pipe(gulp.dest(paths.lib.dest));
@@ -73,6 +73,12 @@ gulp.task('libs-fonts', function() {
   return gulp.src(paths.fonts.src, { base: './bower_components/semantic/src' })
     .pipe(changed(paths.fonts.dest))
     .pipe(gulp.dest(paths.fonts.dest));
+});
+
+gulp.task('material-ui', function() {
+  return gulp.src('node_modules/material-ui/lib/**')
+    .pipe(changed('dist/lib/material-ui'))
+    .pipe(gulp.dest('dist/lib/material-ui'));
 });
 
 gulp.task('default', ['web-pages', 'Javascript', 'React', 'Less', 'libs', 'libs-fonts']);
