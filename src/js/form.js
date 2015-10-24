@@ -1,7 +1,14 @@
 $(document).ready( function(){
-	$(".start").click(function(){
-			$.fn.fullpage.moveSectionDown();
+	$(".start.button").click(function(){
+		$.fn.fullpage.moveSectionDown();
 	});
-  $(".ui.radio.checkbox").checkbox();
+	$(".next-page.button").click(function() {
+		$.fn.fullpage.moveSlideRight();
+	});
+	$(".submit.button").click(function() {
+		$(".ui.form").submit();
+	});
+	$(".ui.radio.checkbox").checkbox();
+
 
 })
