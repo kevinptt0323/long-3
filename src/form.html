@@ -1,70 +1,89 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Vertical navigation dots - fullPage.js</title>
-	<link rel="stylesheet" type="text/css" href="lib/normalize.css" />
-	<link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css" />
-	<link rel="stylesheet" type="text/css" href="lib/semantic.min.css" />
-	<script src="lib/jquery.min.js"></script>
-<!--	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Vertical navigation dots - fullPage.js</title>
+    <link rel="stylesheet" type="text/css" href="lib/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css" />
+    <link rel="stylesheet" type="text/css" href="lib/semantic.min.css" />
+    <script src="lib/jquery.min.js"></script>
+    <!--  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>-->
 
-<!--	<script type="text/javascript" src="../vendors/jquery.slimscroll.min.js"></script>-->
+    <!--  <script type="text/javascript" src="../vendors/jquery.slimscroll.min.js"></script>-->
 
-	<script src="lib/semantic.min.js"></script>
-	<script src="js/jquery.fullPage.min.js"></script>
+    <script src="lib/semantic.min.js"></script>
+    <script src="js/jquery.fullPage.min.js"></script>
 
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#fullpage').fullpage({
-				anchors: ['firstPage', 'secondPage', '3rdPage'],
-				sectionsColor: ['#8FB98B', '#DE564B', '#EAE1C0'],
-				slidesNavigation: true,
-			});
-		});
-	</script>
+    <script type="text/javascript">
+$(document).ready(function() {
+  $('#fullpage').fullpage({
+    anchors: ['firstPage', 'secondPage', '3rdPage'],
+    sectionsColor: ['transparent', '#DE564B', '#EAE1C0'],
+    slidesNavigation: true,
+    controlArrows: false,
+  });
+});
+    </script>
+    <style>
+.section{
+  background-size: cover;
+  -webkit-background-size: cover;
+}
 
-</head>
-<body>
+#section0{
+  background-image: url(static/index.jpg) ;
+}
+.title{
+  text-align:center;
+  margin:auto;
+  font-size:4em!important;
+}
 
-<div id="fullpage">
-	<div class="section" id="section0">
-		<div class="intro ui basic center segment">
-			<div class="ui header">Sliders navigation dots</div>
-			<p>Create a navigation for your landscape sliders</p>
-		</div>
-	</div>
-	<div class="section" id="section1">
-	    <div class="slide" id="slide1" data-anchor="slide1">
-			<div class="intro">
-				<h1>Clickable</h1>
-				<p>
-					You can even click on the navigation and jump directly to another section.
-				</p>
-			</div>
-		</div>
+    </style>
 
-	    <div class="slide" id="slide2" data-anchor="slide2">
-			<h1>Slide 2</h1>
-		</div>
+  </head>
+  <body>
+    <div id="fullpage">
+      <div class="section" id="section0" style="text-align:center;">
+        <div class="intro ui basic center segment">
+          <div  class="ui header title">Long Long Healthcare</div>
+          <h1 class="ui header">Caring about your health long long long</h1>
+          <div style="position:relative;top:50px;left:20px;">
+            <button class="ui massive teal button">START</button>
+          </div>
+        </div>
+      </div>
+      <div class="section" id="section1">
+        <div class="slide" id="slide1" data-anchor="slide1">
+          <div class="intro">
+            <h1>Clickable</h1>
+            <p>
+            You can even click on the navigation and jump directly to another section.
+            </p>
+          </div>
+        </div>
 
-		<div class="slide" id="slide3" data-anchor="slide3">
-			<h1>Slide 3</h1>
-		</div>	<div class="slide" id="slide3" data-anchor="slide3">
-			<h1>Slide 4</h1>
-		</div>
-		<div class="slide" id="slide3" data-anchor="slide3">
-			<h1>Slide 5</h1>
-		</div>
-	</div>
-	<div class="section" id="section2">
-		<div class="intro">
-			<h1>Enjoy it</h1>
-		</div>
-	</div>
-</div>
+        <div class="slide" id="slide2" data-anchor="slide2">
+          <h1>Slide 2</h1>
+        </div>
+
+        <div class="slide" id="slide3" data-anchor="slide3">
+          <h1>Slide 3</h1>
+        </div>  <div class="slide" id="slide3" data-anchor="slide3">
+          <h1>Slide 4</h1>
+        </div>
+        <div class="slide" id="slide3" data-anchor="slide3">
+          <h1>Slide 5</h1>
+        </div>
+      </div>
+      <div class="section" id="section2">
+        <div class="intro">
+          <h1>Enjoy it</h1>
+        </div>
+      </div>
+    </div>
 
 
-</body>
+  </body>
 </html>
