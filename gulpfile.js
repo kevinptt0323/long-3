@@ -24,7 +24,12 @@ var paths = {
     dest: './dist/css'
   },
   lib: {
-    src: mainBowerFiles().concat('node_modules/react/dist/*.js', 'node_modules/react-highcharts/dist/bundle/highcharts.js', 'node_modules/requirejs/require.js'),
+    src: mainBowerFiles().concat(
+      'node_modules/react/dist/*.js',
+      'node_modules/react-dom/dist/*.js',
+      'node_modules/react-highcharts/dist/bundle/highcharts.js',
+      'node_modules/requirejs/require.js'
+    ),
     dest: './dist/lib'
   },
   fonts: {

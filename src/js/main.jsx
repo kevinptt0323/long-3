@@ -1,4 +1,4 @@
-define(['react', 'highcharts'], function(React, ReactHighcharts) {
+define(['react', 'react-dom', 'highcharts'], function(React, ReactDOM, ReactHighcharts) {
   var config = {
     xAxis: {
       categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -8,5 +8,5 @@ define(['react', 'highcharts'], function(React, ReactHighcharts) {
     }]
   };
 
-  React.render(React.createElement(ReactHighcharts, { config: config }), document.getElementById('test'));
+  ReactDOM.render(React.createElement(ReactHighcharts, { config: config }), document.getElementById('test'));
 });
