@@ -84,7 +84,7 @@ gulp.task('libs-fonts', function() {
     .pipe(gulp.dest(paths.fonts.dest));
 });
 
-gulp.task('gulp', ['libs-fonts'], function() {
+gulp.task('static', ['libs-fonts'], function() {
   return gulp.src(paths.static.src)
     .pipe(changed(paths.static.dest))
     .pipe(gulp.dest(paths.static.dest));
