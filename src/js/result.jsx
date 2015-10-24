@@ -32,7 +32,7 @@ var Panel = React.createClass({
 var Info = React.createClass({
   render() {
     return (
-      <Paper className="item" zInder={1}>
+      <Paper className="Info" zInder={1}>
         <InfoGraph uid={this.props.displayData.uid} />
         <InfoContent title={this.props.displayData.title} description={this.props.displayData.description} />
       </Paper>
