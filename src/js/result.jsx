@@ -4,7 +4,8 @@ var
   React = require('react'),
   ReactDOM = require('react-dom'),
   ReactHighcharts = require('react-highcharts/dist/bundle/highcharts'),
-  Paper = require('material-ui/lib/paper')
+  Paper = require('material-ui/lib/paper'),
+  $ = require('jquery')
 ;
 var config = {
   xAxis: {
@@ -18,7 +19,7 @@ var config = {
 var Panel = React.createClass({
   render() {
     var infos = [];
-    for(var data of this.props.displayDatas) {
+    for(var data of this.state._result) {
       infos.push(<Info displayData={data} key={data.uid} />);
     }
     return (
@@ -26,6 +27,34 @@ var Panel = React.createClass({
         {infos}
       </div>
     );
+  },
+  getInitialState: function() {
+    return { _result: [] };
+  },
+  componentDidMount() {
+    this.loadResult();
+  },
+  loadResult() {
+    $.ajax({
+      url: this.props.resultUrl,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        var result = this.props.displayDatas;
+        result[0].description = data.height;
+        result[1].description = data.smoke;
+        result[2].description = data.wine;
+        result[3].description = data.sleep;
+        this.setState({_result: result});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.resultUrl, status, err.toString());
+      }.bind(this),
+      complete: function() {
+        $("#loader").fadeOut(500);
+        setTimeout(this.loadStatus, 10000);
+      }.bind(this)
+    });
   }
 });
 
@@ -81,12 +110,12 @@ var InfoContent = React.createClass({
 
 ReactDOM.render((() => {
     var displayDatas = [
-      { uid: "8773785-untitled-infographic", title: "18歲以上國民，近一半體重過重", description: "恭喜你，你體重正常" },
-      { uid: "8773786-smoking_yes", title: "18歲以上國民，20%的人每天都吸煙", description: "恭喜你，你並不吸煙" },
-      { uid: "8774513-alcohol", title: "一位成人每天平均喝3.3公升的酒", description: "別飲酒過量" },
-      { uid: "8774622-sleeping", title: "一位成人每天平均睡8.7小時", description: "你好像睡太少了" }
+      { uid: "8773785-untitled-infographic", title: "18歲以上國民，近一半體重過重"},
+      { uid: "8773786-smoking_yes", title: "18歲以上國民，20%的人每天都吸煙"},
+      { uid: "8774513-alcohol", title: "一位成人每天平均喝3.3公升的酒"},
+      { uid: "8774622-sleeping", title: "一位成人每天平均睡8.7小時"}
     ];
-    return <Panel displayDatas={displayDatas} />;
+    return <Panel displayDatas={displayDatas} resultUrl="api/dataHandler.php?result" />;
   })(),
   document.getElementById('panel')
 );

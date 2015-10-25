@@ -25,6 +25,7 @@
   "dependencies": {
     "browserify": "^11.2.0",
     "gulp-browserify": "^0.5.1",
+    "jquery": "^2.1.4",
     "material-ui": "^0.13.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
