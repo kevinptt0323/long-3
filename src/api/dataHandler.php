@@ -4,11 +4,19 @@ require_once("csvParser.php");
 
 function genResult($in){
 
+    $std_exercise=array(
+        "male"=>35.6,
+        "female"=>27,
+    );
     $std_height=body($in['height']);
 
     if($in['weight']>$std_height['overweight']){
         $warn=$in['weight']."公斤的你超重囉";
-    }else $warn="恭喜你體重很標準";
+    }
+    else if($in['weight']<$std_height['normal']){
+    }else{
+        $warn=$in['weight']."公斤的你太輕了";
+    }
 
     #default
     $result=array(
@@ -18,6 +26,20 @@ function genResult($in){
         'smoke'=>"恭喜你不吸煙",
         'vegetable'=>"在台灣，只有不到9%的人能做到。而你是其中之一",
     );
+    //male
+    if($in['gender']==1){
+        if($in['exercise']){
+            $result['exercise']="恭喜你，你是".$std_exercise['male']."%規律運動的男性其中之一";
+        }else{
+            $result['exercise']="加油，努力成為".$std_exercise['male']."%規律運動的男性其中之一";
+        }
+    }else if($in['gender']==2){
+        if($in['exercise']){
+            $result['exercise']="恭喜你，你是".$std_exercise['female']."%規律運動的男性其中之一";
+        }else{
+            $result['exercise']="加油，努力成為".$std_exercise['female']."%規律運動的男性其中之一";
+        }
+    }
     if($in['wine']>3.3){
         $result['wine']="你喝".$in['wine']."公升/日好像有點多…";
     }
