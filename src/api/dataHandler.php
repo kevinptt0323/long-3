@@ -14,8 +14,9 @@ function genResult($in){
         $warn=$in['weight']."公斤的你超重囉";
     }
     else if($in['weight']<$std_height['normal']){
-    }else{
         $warn=$in['weight']."公斤的你太輕了";
+    }else{
+        $warn="恭喜，你的體重很標準";
     }
 
     #default
@@ -44,7 +45,7 @@ function genResult($in){
         $result['wine']="你喝".$in['wine']."公升/日好像有點多…";
     }
     if($in['sleep']<8.7){
-        $result['sleep']="每天只睡".$in['sleep']."小時太少了";
+        $result['sleep']="你每天只睡".$in['sleep']."小時太少了";
     }
     if($in['vegetable']==0){
         $result['vegetable']="在台灣，有近91%的人每日蔬果量不足…而你是其中之一";
@@ -57,6 +58,7 @@ $input_json = file_get_contents('php://input');
 if($input_json){
     $obj = json_decode($input_json,true);
     $_SESSION['data']=$obj;
+    echo "";
 }else if(isset($_GET['result'])){
     if(isset($_SESSION['data'])){
         genResult($_SESSION['data']);
