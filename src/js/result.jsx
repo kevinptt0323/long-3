@@ -8,8 +8,12 @@ var
   ReactHighcharts  = require('react-highcharts/dist/bundle/highcharts'),
   Paper            = require('material-ui/lib/paper'),
   CircularProgress = require('material-ui/lib/circular-progress'),
-  RaisedButton     = require('material-ui/lib/raised-button')
+  RaisedButton     = require('material-ui/lib/raised-button'),
+  Dialog           = require('material-ui/lib/dialog'),
+  injectTapEventPlugin = require("react-tap-event-plugin")
 ;
+
+injectTapEventPlugin();
 
 var Page = React.createClass({
   render() {
@@ -96,23 +100,54 @@ var Info = React.createClass({
       'init': this.state.init,
       'final': !this.state.init
     });
+    var standardActions = [
+      { text: 'Close', onTouchTap: this._onDialogClose.bind(this), ref: 'submit' }
+    ];
     return (
       <Paper className={paperCls} zInder={1}>
         <InfoGraph uid={this.props.displayData.uid} />
         <InfoContent title={this.props.displayData.title} description={this.props.displayData.description} />
         <div className="button">
-          <RaisedButton label="觀看相關數據" secondary={true} />
+          <RaisedButton label="觀看相關數據" secondary={true} onTouchTap={this.handleTouchTapDialog.bind(this)} />
         </div>
+        <Dialog
+          ref="dialog"
+          title="相關數據"
+          actions={standardActions}
+          actionFocus="submit"
+          modal={false}>
+          <ReactHighcharts config={this.state.chart} />;
+        </Dialog>
       </Paper>
     );
   },
   getInitialState() {
-    return { init: true };
+    return { init: true, chart: null };
   },
   componentDidMount() {
+    $.ajax({
+      url: "js/chart/"+this.props.displayData.chart+".js",
+      dataType: 'json',
+      success: function(data) {
+        console.log("~");
+        console.log(data);
+        this.setState({chart: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.resultUrl, status, err.toString());
+      }.bind(this),
+      complete: function(a, b) {
+      }.bind(this)
+    });
     setTimeout(() => {
       this.setState( {init: false} );
     }, 500);
+  },
+  _onDialogClose() {
+    this.refs.dialog.dismiss();
+  },
+  handleTouchTapDialog(e) {
+    this.refs.dialog.show();
   }
 });
 
