@@ -27,6 +27,7 @@ var Page = React.createClass({
         <div className="progress">
           <CircularProgress mode="indeterminate" size={3} />
         </div>
+        <ScorePanel resultUrl="api/dataHandler.php?result" />
         <Panel displayDatas={this.state.displayDatas} resultUrl="api/dataHandler.php?result" />
       </div>
     );
@@ -46,7 +47,107 @@ var Page = React.createClass({
   componentDidMount() {
     setTimeout(() => {
       this.setState( {init: false} );
-    }, 5000);
+    }, 3000);
+  }
+});
+
+var ScorePanel = React.createClass({
+  render() {
+    return (
+      <div className="panel">
+        <ScoreDown scores={[
+          { "score": 80, "title": "BMI" },
+          { "score": 60, "title": "Smoke" },
+          { "score": 50, "title": "Wine" },
+          { "score": 76, "title": "Sleep" },
+          { "score": 68, "title": "Exercise" },
+          { "score": 90, "title": "Vegetable" }
+        ]} />
+      </div>
+    );
+  },
+  getInitialState: function() {
+    return { _result: [] };
+  },
+  componentDidMount() {
+    this.loadResult();
+  },
+  loadResult() {
+    $.ajax({
+      url: this.props.resultUrl,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        var result = this.props.displayDatas;
+        result[0].description = data.height;
+        result[1].description = data.smoke;
+        result[2].description = data.wine;
+        result[3].description = data.sleep;
+        result[4].description = data.exercise;
+        result[5].description = data.vegetable;
+        result[6].description = data.Bvac;
+        this.setState({_result: result});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        //console.error(this.props.resultUrl, status, err.toString());
+      }.bind(this),
+      complete: function() {
+      }.bind(this)
+    });
+  }
+});
+
+var ScoreTop = React.createClass({
+  render() {
+    return (
+      <div>
+        <Score score="this.props.score" />
+      </div>
+    );
+  }
+});
+
+var ScoreDown = React.createClass({
+  render() {
+    var scores = [];
+    for(var score0 of this.props.scores) {
+      scores.push(<Score score={score0.score} title={score0.title} />);
+    }
+    return (
+      <div>
+        {scores}
+      </div>
+    );
+  }
+});
+
+var Score = React.createClass({
+  render() {
+    return (
+      <div className="score-block">
+        <label>{this.props.title}</label>
+        <CircularProgress mode="determinate" size={3} value={this.state.score} />
+        <p className="score">{this.state.score}</p>
+      </div>
+    );
+  },
+  getInitialState() {
+    return { score: 0 };
+  },
+  componentDidMount() {
+    var runScore = (curr, maxx) => {
+      if( curr>=maxx ) {
+        this.setState({ score: maxx });
+        return;
+      }
+      this.setState({ score: curr });
+      setTimeout(() => {
+        runScore(curr+(Math.random()*100|0)%3+1, maxx)
+      }, 100);
+    }
+    setTimeout(() => {
+      runScore(0, this.props.score);
+    }, 4000);
   }
 });
 
