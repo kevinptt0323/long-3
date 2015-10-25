@@ -55,20 +55,13 @@ var ScorePanel = React.createClass({
   render() {
     return (
       <div className="panel">
-        <ScoreTop score={82} />
-        <ScoreDown scores={[
-          { "score": (Math.random()*20|0)+70, "title": "BMI" },
-          { "score": (Math.random()*20|0)+70, "title": "Smoke" },
-          { "score": (Math.random()*20|0)+70, "title": "Wine" },
-          { "score": (Math.random()*20|0)+70, "title": "Sleep" },
-          { "score": (Math.random()*20|0)+70, "title": "Exercise" },
-          { "score": (Math.random()*20|0)+70, "title": "Vegetable" }
-        ]} />
+        <ScoreTop score={this.state.scores["avg"]|0} />
+        <ScoreDown scores={this.state.scores} />
       </div>
     );
   },
   getInitialState: function() {
-    return { _result: [] };
+    return { scores: {} };
   },
   componentDidMount() {
     this.loadResult();
@@ -79,16 +72,8 @@ var ScorePanel = React.createClass({
       dataType: 'json',
       cache: false,
       success: function(data) {
-        var result = this.props.displayDatas;
-        data = data.msg;
-        result[0].description = data.height;
-        result[1].description = data.smoke;
-        result[2].description = data.wine;
-        result[3].description = data.sleep;
-        result[4].description = data.exercise;
-        result[5].description = data.vegetable;
-        result[6].description = data.Bvac;
-        this.setState({_result: result});
+        data = data.score;
+        this.setState({scores: data});
       }.bind(this),
       error: function(xhr, status, err) {
         //console.error(this.props.resultUrl, status, err.toString());
@@ -112,8 +97,9 @@ var ScoreTop = React.createClass({
 var ScoreDown = React.createClass({
   render() {
     var scores = [];
-    for(var score0 of this.props.scores) {
-      scores.push(<Score score={score0.score} title={score0.title} size={3}/>);
+    for(var key in this.props.scores) {
+      if( key == "avg" ) continue;
+      scores.push(<Score score={this.props.scores[key]} title={key} size={3} />);
     }
     return (
       <div>
@@ -137,6 +123,8 @@ var Score = React.createClass({
     return { score: 0 };
   },
   componentDidMount() {
+    var interval = 100;
+    if( this.props.size>=5 ) interval = 200;
     var runScore = (curr, maxx) => {
       if( curr>=maxx ) {
         this.setState({ score: maxx });
@@ -145,11 +133,11 @@ var Score = React.createClass({
       this.setState({ score: curr });
       setTimeout(() => {
         runScore(curr+(Math.random()*100|0)%3+1, maxx)
-      }, 100);
+      }, interval);
     }
     setTimeout(() => {
       runScore(0, this.props.score);
-    }, 4000);
+    }, 3000);
   }
 });
 
