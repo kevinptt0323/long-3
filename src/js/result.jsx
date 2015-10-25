@@ -198,7 +198,7 @@ var Info = React.createClass({
       "hide": hide
     });
     var standardActions = [
-      { text: 'Close', onTouchTap: this._onDialogClose.bind(this), ref: 'submit' }
+      { text: 'Close', onTouchTap: this._onDialogClose.bind(this)}
     ];
     return (
       <Paper className={paperCls} zInder={1}>
