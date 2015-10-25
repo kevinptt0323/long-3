@@ -33,13 +33,13 @@ var Page = React.createClass({
   },
   getInitialState() {
     var displayDatas = [
-      { uid: "8773785-untitled-infographic", title: "18歲以上國民，近一半體重過重", chart: "1"},
-      { uid: "8777642-smoking", title: "18歲以上國民，20%的人每天都吸煙", chart: "1"},
-      { uid: "8777690-alcohol_new", title: "一位成人每天平均喝3.3公升的酒", chart: "1"},
-      { uid: "8774622-sleeping", title: "一位成人每天平均睡8.7小時", chart: "1"},
-      { uid: "8777446-exercise-time", title: "新竹市民是台灣運動量第一，平均每天1小時", chart: "1"},
-      { uid: "8777826-threeveg", title: "只有8.5%的台灣人每天固定吃三份蔬菜和二份水果以上", chart: "1"},
-      { uid: "8778236-b-liver", title: "B肝可透過唾液傳染，可透過定期補疫苗解決", chart: "1"}
+      { uid: "8773785-untitled-infographic", title: "18歲以上國民，近一半體重過重", chart: "weight"},
+      { uid: "8777642-smoking", title: "18歲以上國民，20%的人每天都吸煙", chart: "smoking"},
+      { uid: "8777690-alcohol_new", title: "一位成人每天平均喝3.3公升的酒", chart: ""},
+      { uid: "8774622-sleeping", title: "一位成人每天平均睡8.7小時", chart: ""},
+      { uid: "8777446-exercise-time", title: "新竹市民是台灣運動量第一，平均每天1小時", chart: "exercise"},
+      { uid: "8777826-threeveg", title: "只有8.5%的台灣人每天固定吃三份蔬菜和二份水果以上", chart: ""},
+      { uid: "8778236-b-liver", title: "B肝可透過唾液傳染，可透過定期補疫苗解決", chart: ""}
     ];
     return { displayDatas: displayDatas, init: true };
   },
@@ -85,7 +85,7 @@ var Panel = React.createClass({
         this.setState({_result: result});
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(this.props.resultUrl, status, err.toString());
+        //console.error(this.props.resultUrl, status, err.toString());
       }.bind(this),
       complete: function() {
       }.bind(this)
@@ -100,6 +100,11 @@ var Info = React.createClass({
       'init': this.state.init,
       'final': !this.state.init
     });
+    var hide = this.props.displayData && this.props.displayData.chart != "" ? false : true;
+    var btnCls = classNames({
+      "button": true,
+      "hide": hide
+    });
     var standardActions = [
       { text: 'Close', onTouchTap: this._onDialogClose.bind(this), ref: 'submit' }
     ];
@@ -107,7 +112,7 @@ var Info = React.createClass({
       <Paper className={paperCls} zInder={1}>
         <InfoGraph uid={this.props.displayData.uid} />
         <InfoContent title={this.props.displayData.title} description={this.props.displayData.description} />
-        <div className="button">
+        <div className={btnCls}>
           <RaisedButton label="觀看相關數據" secondary={true} onTouchTap={this.handleTouchTapDialog.bind(this)} />
         </div>
         <Dialog
@@ -122,23 +127,23 @@ var Info = React.createClass({
     );
   },
   getInitialState() {
-    return { init: true, chart: null };
+    return { init: true, chart: {} };
   },
   componentDidMount() {
-    $.ajax({
-      url: "js/chart/"+this.props.displayData.chart+".js",
-      dataType: 'json',
-      success: function(data) {
-        console.log("~");
-        console.log(data);
-        this.setState({chart: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.resultUrl, status, err.toString());
-      }.bind(this),
-      complete: function(a, b) {
-      }.bind(this)
-    });
+    if( this.props.displayData.chart !== "" ) {
+      $.ajax({
+        url: "js/chart/"+this.props.displayData.chart+".js",
+        dataType: 'json',
+        success: function(data) {
+          this.setState({chart: data});
+        }.bind(this),
+        error: function(xhr, status, err) {
+          //console.error(this.props.resultUrl, status, err.toString());
+        }.bind(this),
+        complete: function(a, b) {
+        }.bind(this)
+      });
+    }
     setTimeout(() => {
       this.setState( {init: false} );
     }, 500);
