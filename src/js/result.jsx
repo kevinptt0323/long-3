@@ -33,13 +33,13 @@ var Page = React.createClass({
   },
   getInitialState() {
     var displayDatas = [
-      { uid: "8773785-untitled-infographic", title: "18歲以上國民，近一半體重過重"},
-      { uid: "8777642-smoking", title: "18歲以上國民，20%的人每天都吸煙"},
-      { uid: "8777690-alcohol_new", title: "一位成人每天平均喝3.3公升的酒"},
-      { uid: "8774622-sleeping", title: "一位成人每天平均睡8.7小時"},
-      { uid: "8777446-exercise-time", title: "新竹市民是台灣運動量第一，平均每天1小時"},
-      { uid: "8777826-threeveg", title: "只有8.5%的台灣人每天固定吃三份蔬菜和二份水果以上"},
-      { uid: "8778236-b-liver", title: "B肝可透過唾液傳染，可透過定期補疫苗解決"}
+      { uid: "8773785-untitled-infographic", title: "18歲以上國民，近一半體重過重", chart: "1"},
+      { uid: "8777642-smoking", title: "18歲以上國民，20%的人每天都吸煙", chart: "1"},
+      { uid: "8777690-alcohol_new", title: "一位成人每天平均喝3.3公升的酒", chart: "1"},
+      { uid: "8774622-sleeping", title: "一位成人每天平均睡8.7小時", chart: "1"},
+      { uid: "8777446-exercise-time", title: "新竹市民是台灣運動量第一，平均每天1小時", chart: "1"},
+      { uid: "8777826-threeveg", title: "只有8.5%的台灣人每天固定吃三份蔬菜和二份水果以上", chart: "1"},
+      { uid: "8778236-b-liver", title: "B肝可透過唾液傳染，可透過定期補疫苗解決", chart: "1"}
     ];
     return { displayDatas: displayDatas, init: true };
   },
