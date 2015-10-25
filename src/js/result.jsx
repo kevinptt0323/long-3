@@ -125,8 +125,8 @@ var Score = React.createClass({
   render() {
     return (
       <div className="score-block">
-        <label>{this.props.title}</label>
         <CircularProgress mode="determinate" size={3} value={this.state.score} />
+        <p className="label">{this.props.title}</p>
         <p className="score">{this.state.score}</p>
       </div>
     );

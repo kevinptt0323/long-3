@@ -75,19 +75,17 @@
 .score-block {
 	display: inline-block;
 	position: relative;
-	label {
-		position: absolute;
-		z-index: 100;
-		width: 100%;
-		text-align: center;
-		top: 0px;
-		font-size: 2em;
-	}
 	p {
 		position: absolute;
 		width: 100%;
 		text-align: center;
-		top: 25px;
-		font-size: 4em;
+		&.label {
+			top: 0px;
+			font-size: 2em;
+		}
+		&.score {
+			top: 25px;
+			font-size: 4em;
+		}
 	}
 }
