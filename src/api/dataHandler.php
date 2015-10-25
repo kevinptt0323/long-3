@@ -125,7 +125,10 @@ function genResult($in){
     }
     $score['avg']=$sum/6;
 
-    echo json_encode($result);
+    $respond['msg']=$result;
+    $respond['score']=$score;
+
+    echo json_encode($respond);
 }
 
 $input_json = file_get_contents('php://input');
