@@ -74,7 +74,7 @@ gulp.task('Less', function() {
     .pipe(gulp.dest(paths.less.dest));
 });
 
-gulp.task('libs', ['libs-fonts'], function() {
+gulp.task('libs', function() {
   return gulp.src(paths.lib.src)
     .pipe(changed(paths.lib.dest))
     .pipe(gulp.dest(paths.lib.dest));
@@ -111,4 +111,4 @@ gulp.task('static', function() {
     .pipe(gulp.dest(paths.static.dest));
 });
 
-gulp.task('default', ['web-pages', 'Javascript', 'React', 'Less', 'libs', 'libs-fonts', 'browserify', 'static']);
+gulp.task('default', ['web-pages', 'Javascript', 'React', 'Less', 'libs', 'browserify', 'static']);
