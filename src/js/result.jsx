@@ -111,9 +111,10 @@ var InfoContent = React.createClass({
 ReactDOM.render((() => {
     var displayDatas = [
       { uid: "8773785-untitled-infographic", title: "18歲以上國民，近一半體重過重"},
-      { uid: "8773786-smoking_yes", title: "18歲以上國民，20%的人每天都吸煙"},
-      { uid: "8774513-alcohol", title: "一位成人每天平均喝3.3公升的酒"},
-      { uid: "8774622-sleeping", title: "一位成人每天平均睡8.7小時"}
+      { uid: "8777642-smoking", title: "18歲以上國民，20%的人每天都吸煙"},
+      { uid: "8777690-alcohol_new", title: "一位成人每天平均喝3.3公升的酒"},
+      { uid: "8774622-sleeping", title: "一位成人每天平均睡8.7小時"},
+      { uid: "8777446-exercise-time", title: "exercise", description: "exercise"}
     ];
     return <Panel displayDatas={displayDatas} resultUrl="api/dataHandler.php?result" />;
   })(),
