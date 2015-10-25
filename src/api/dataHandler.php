@@ -26,14 +26,14 @@ function genResult($in){
     #default
     $result=array(
         'height' => "你身高".$in['height']."公分，正常體重應為".$std_height['normal']."公斤至".$std_height['overweight']."公斤，".$warn,
-        'wine'=>"小酌無妨，別喝太多",
-        'smoke'=>"哦~你不吸煙",
+        'wine'=>"恭喜您，一年低於3.3公升的適度飲酒可以促進身體健康，促進血液循環，有益血管健康。酒精具有擴張血管、降血壓的作用，喝酒臉會微微發紅，便是微血管擴張、血液循環變好的證明。",
+        'smoke'=>"您沒有吸菸，是健康的典範",
         'vegetable'=>"在台灣，只有不到9%的人能做到。而你是其中之一",
     );
     //exercise
     if($in['gender']==1){
         if($in['exercise']){
-            $result['exercise']="恭喜你，你是那".$std_exercise['male']."%規律運動的男性之一。";
+            $result['exercise']="恭喜，你是那".$std_exercise['male']."%規律運動的男性之一。";
         }else{
             $result['exercise']="加油，努力成為".$std_exercise['male']."%規律運動的男性之一。";
         }
@@ -88,7 +88,7 @@ function genResult($in){
     }
 
     if($in['smoke']){
-        $result['smoke']="還是少抽一點";
+        $result['smoke']="很不幸的，您是其中一位，還是少抽一點";
         $score['smoke']=60;
     }else{
         $score['smoke']=90;
@@ -96,19 +96,19 @@ function genResult($in){
 
     switch($in['sleep']){
     case 4:
-        $result['sleep']="只睡四小時，請定期檢查肝還在不在";
+        $result['sleep']="4小時，睡眠時數過少！長期睡眠時數過少將導致記憶力下降，注意力不集中，精神渙散，煩躁等等。趕快改變作息，讓自己多睡一點。";
         $score['sleep']=50;
         break;
     case 6:
-        $result['sleep']="只睡六小時少少的，不過好像還可以";
+        $result['sleep']="6小時，睡眠時數過少！長期睡眠時數過少將導致記憶力下降，注意力不集中，精神渙散，煩躁等等。趕快改變作息，讓自己多睡一點。";
         $score['sleep']=70;
         break;
     case 8:
-        $result['sleep']="八小時左右，健康睡眠";
+        $result['sleep']="恭喜您，您的睡眠時數正常！睡眠正常可以增加記憶力，讓頭腦變清晰，注意力會更集中，要保持下去唷！";
         $score['sleep']=100;
         break;
     case 10:
-        $result['sleep']="十小時，睡飽飽";
+        $result['sleep']="10小時以上，有點睡過多囉！根據數據，最好的睡眠時間為8小時，長期睡眠過多將提高患抑鬱症風險，也會讓您變懶，最後造成智力下降。 ";
         $score['sleep']=80;
         break;
     }
