@@ -32,9 +32,9 @@ $(document).ready( function(){
 			url: "api/dataHandler.php",
 			data: JSON.stringify(form),
 			dataType: "json",
-			timeout: 10000,
-			success: function(res) {
-				document.location = "result.html"
+			timeout: 1000,
+			error: function(res) {
+                document.location="result.html";
 			}
 		})
 	});
