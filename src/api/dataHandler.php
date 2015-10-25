@@ -114,9 +114,9 @@ function genResult($in){
     }
 
     if($in['Bvac']){
-        $result['Bvac']="B型肝炎可透過唾液傳染，請提醒朋友們要記得補打";
+        $result['Bvac']="可以提醒朋友們要記得補打";
     }else{
-        $result['Bvac']="B型肝炎可透過唾液傳染，小時候打的抗體通常在十年後會無效，要記得補打哦";
+        $result['Bvac']="小時候打的抗體通常在十年後會無效，要記得補打哦";
     }
 
     $sum=0;
