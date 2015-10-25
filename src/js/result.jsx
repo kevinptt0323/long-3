@@ -3,6 +3,7 @@
 var
   React = require('react'),
   ReactDOM = require('react-dom'),
+  classNames = require('classnames'),
   ReactHighcharts = require('react-highcharts/dist/bundle/highcharts'),
   Paper = require('material-ui/lib/paper'),
   $ = require('jquery')
@@ -60,12 +61,25 @@ var Panel = React.createClass({
 
 var Info = React.createClass({
   render() {
+    var paperCls = classNames({
+      'Info': true,
+      'init': this.state.init,
+      'final': !this.state.init
+    });
     return (
-      <Paper className="Info" zInder={1}>
+      <Paper className={paperCls} zInder={1}>
         <InfoGraph uid={this.props.displayData.uid} />
         <InfoContent title={this.props.displayData.title} description={this.props.displayData.description} />
       </Paper>
     );
+  },
+  getInitialState() {
+    return { init: true };
+  },
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState( {init: false} );
+    }, 500);
   }
 });
 
@@ -114,7 +128,8 @@ ReactDOM.render((() => {
       { uid: "8777642-smoking", title: "18歲以上國民，20%的人每天都吸煙"},
       { uid: "8777690-alcohol_new", title: "一位成人每天平均喝3.3公升的酒"},
       { uid: "8774622-sleeping", title: "一位成人每天平均睡8.7小時"},
-      { uid: "8777446-exercise-time", title: "exercise", description: "exercise"}
+      { uid: "8777446-exercise-time", title: "exercise", description: "exercise"},
+      { uid: "8777826-threeveg", title: "vegetable", description: "vegetable"}
     ];
     return <Panel displayDatas={displayDatas} resultUrl="api/dataHandler.php?result" />;
   })(),
