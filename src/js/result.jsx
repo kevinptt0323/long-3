@@ -6,16 +6,43 @@ var
   classNames = require('classnames'),
   ReactHighcharts = require('react-highcharts/dist/bundle/highcharts'),
   Paper = require('material-ui/lib/paper'),
+  CircularProgress = require('material-ui/lib/circular-progress'),
   $ = require('jquery')
 ;
-var config = {
-  xAxis: {
-    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+var Page = React.createClass({
+  render() {
+    var pageCls = classNames({
+      'page': true,
+      'init': this.state.init,
+      'final': !this.state.init
+    });
+    return (
+      <div className={pageCls}>
+        <Panel displayDatas={this.state.displayDatas} resultUrl="api/dataHandler.php?result" />
+        <div className="progress">
+          <CircularProgress mode="indeterminate" size={3} />
+        </div>
+      </div>
+    );
   },
-  series: [{
-    data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-  }]
-};
+  getInitialState() {
+    var displayDatas = [
+      { uid: "8773785-untitled-infographic", title: "18歲以上國民，近一半體重過重"},
+      { uid: "8777642-smoking", title: "18歲以上國民，20%的人每天都吸煙"},
+      { uid: "8777690-alcohol_new", title: "一位成人每天平均喝3.3公升的酒"},
+      { uid: "8774622-sleeping", title: "一位成人每天平均睡8.7小時"},
+      { uid: "8777446-exercise-time", title: "exercise", description: "exercise"},
+      { uid: "8777826-threeveg", title: "vegetable", description: "vegetable"}
+    ];
+    return { displayDatas: displayDatas, init: true };
+  },
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState( {init: false} );
+    }, 5000);
+  }
+});
 
 var Panel = React.createClass({
   render() {
@@ -24,7 +51,7 @@ var Panel = React.createClass({
       infos.push(<Info displayData={data} key={data.uid} />);
     }
     return (
-      <div>
+      <div className="panel">
         {infos}
       </div>
     );
@@ -46,14 +73,14 @@ var Panel = React.createClass({
         result[1].description = data.smoke;
         result[2].description = data.wine;
         result[3].description = data.sleep;
+        result[4].description = data.exercise;
+        result[5].description = data.vegetable;
         this.setState({_result: result});
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.resultUrl, status, err.toString());
       }.bind(this),
       complete: function() {
-        $("#loader").fadeOut(500);
-        setTimeout(this.loadStatus, 10000);
       }.bind(this)
     });
   }
@@ -62,7 +89,7 @@ var Panel = React.createClass({
 var Info = React.createClass({
   render() {
     var paperCls = classNames({
-      'Info': true,
+      'info': true,
       'init': this.state.init,
       'final': !this.state.init
     });
@@ -122,17 +149,5 @@ var InfoContent = React.createClass({
   }
 });
 
-ReactDOM.render((() => {
-    var displayDatas = [
-      { uid: "8773785-untitled-infographic", title: "18歲以上國民，近一半體重過重"},
-      { uid: "8777642-smoking", title: "18歲以上國民，20%的人每天都吸煙"},
-      { uid: "8777690-alcohol_new", title: "一位成人每天平均喝3.3公升的酒"},
-      { uid: "8774622-sleeping", title: "一位成人每天平均睡8.7小時"},
-      { uid: "8777446-exercise-time", title: "exercise", description: "exercise"},
-      { uid: "8777826-threeveg", title: "vegetable", description: "vegetable"}
-    ];
-    return <Panel displayDatas={displayDatas} resultUrl="api/dataHandler.php?result" />;
-  })(),
-  document.getElementById('panel')
-);
+ReactDOM.render(<Page />, document.getElementById('page'));
 
