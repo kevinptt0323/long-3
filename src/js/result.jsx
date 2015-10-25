@@ -79,6 +79,7 @@ var ScorePanel = React.createClass({
       cache: false,
       success: function(data) {
         var result = this.props.displayDatas;
+        data = data.msg;
         result[0].description = data.height;
         result[1].description = data.smoke;
         result[2].description = data.wine;
@@ -176,6 +177,7 @@ var Panel = React.createClass({
       cache: false,
       success: function(data) {
         var result = this.props.displayDatas;
+        data = data.msg;
         result[0].description = data.height;
         result[1].description = data.smoke;
         result[2].description = data.wine;
