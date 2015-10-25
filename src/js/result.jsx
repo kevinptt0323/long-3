@@ -128,7 +128,7 @@ ReactDOM.render((() => {
     var displayDatas = [
       { uid: "8773785-untitled-infographic", title: "18歲以上國民，近一半體重過重"},
       { uid: "8777642-smoking", title: "18歲以上國民，20%的人每天都吸煙"},
-      { uid: "8777690-alcohol_new", title: "一位成人每天平均喝3.3公升的酒"},
+      { uid: "8777690-alcohol_new", title: "一位成人每年平均喝3.3公升的酒"},
       { uid: "8774622-sleeping", title: "一位成人每天平均睡8.7小時"},
       { uid: "8777446-exercise-time", title: "新竹市民是台灣運動量第一，平均每天1小時"},
       { uid: "8777826-threeveg", title: "只有8.5%的台灣人每天固定吃三份蔬菜和二份水果以上"}
