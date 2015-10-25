@@ -3,7 +3,30 @@ session_start();
 require_once("csvParser.php");
 
 function genResult($in){
-
+    if(!isset($in['vegetable'])){
+        $in['vegetable']=1;
+    }
+    if(!isset($in['wine'])){
+        $in['wine']=0;
+    }
+    if(!isset($in['exercise'])){
+        $in['exercise']=1;
+    }
+    if(!isset($in['smoke'])){
+        $in['smoke']=0;
+    }
+    if(!isset($in['height'])){
+        $in['height']=170;
+    }
+    if(!isset($in['weight'])){
+        $in['weight']=60;
+    }
+    if(!isset($in['sleep'])){
+        $in['sleep']=4;
+    }
+    if(!isset($in['Bvac'])){
+        $in['Bvac']=0;
+    }
     $std_exercise=array(
         "male"=>35.6,
         "female"=>27,
