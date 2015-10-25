@@ -1,13 +1,14 @@
 /* jslint node: true, esnext: true */
 'use strict';
 var
-  React = require('react'),
-  ReactDOM = require('react-dom'),
-  classNames = require('classnames'),
-  ReactHighcharts = require('react-highcharts/dist/bundle/highcharts'),
-  Paper = require('material-ui/lib/paper'),
+  $                = require('jquery'),
+  React            = require('react'),
+  ReactDOM         = require('react-dom'),
+  classNames       = require('classnames'),
+  ReactHighcharts  = require('react-highcharts/dist/bundle/highcharts'),
+  Paper            = require('material-ui/lib/paper'),
   CircularProgress = require('material-ui/lib/circular-progress'),
-  $ = require('jquery')
+  RaisedButton     = require('material-ui/lib/raised-button')
 ;
 
 var Page = React.createClass({
@@ -19,10 +20,10 @@ var Page = React.createClass({
     });
     return (
       <div className={pageCls}>
-        <Panel displayDatas={this.state.displayDatas} resultUrl="api/dataHandler.php?result" />
         <div className="progress">
           <CircularProgress mode="indeterminate" size={3} />
         </div>
+        <Panel displayDatas={this.state.displayDatas} resultUrl="api/dataHandler.php?result" />
       </div>
     );
   },
@@ -97,6 +98,9 @@ var Info = React.createClass({
       <Paper className={paperCls} zInder={1}>
         <InfoGraph uid={this.props.displayData.uid} />
         <InfoContent title={this.props.displayData.title} description={this.props.displayData.description} />
+        <div className="button">
+          <RaisedButton label="觀看相關數據" secondary={true} />
+        </div>
       </Paper>
     );
   },
