@@ -146,7 +146,7 @@ function genResult($in){
     foreach($score as $s){
         $sum+=$s;
     }
-    $score['avg']=$sum/6;
+    $score['avg']=intval($sum/6);
 
     $respond['msg']=$result;
     $respond['score']=$score;
