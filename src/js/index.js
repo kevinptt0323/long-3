@@ -1,3 +1,3 @@
 requirejs(['common'], function (common) {
-      requirejs(['../form']);
+      requirejs(['../js/main']);
 });

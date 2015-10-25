@@ -55,6 +55,7 @@ var ScorePanel = React.createClass({
   render() {
     return (
       <div className="panel">
+        <ScoreTop score={82} />
         <ScoreDown scores={[
           { "score": (Math.random()*20|0)+70, "title": "BMI" },
           { "score": (Math.random()*20|0)+70, "title": "Smoke" },
@@ -102,7 +103,7 @@ var ScoreTop = React.createClass({
   render() {
     return (
       <div>
-        <Score score="this.props.score" />
+        <Score score={this.props.score} title="Total" size={10} />
       </div>
     );
   }
@@ -112,7 +113,7 @@ var ScoreDown = React.createClass({
   render() {
     var scores = [];
     for(var score0 of this.props.scores) {
-      scores.push(<Score score={score0.score} title={score0.title} />);
+      scores.push(<Score score={score0.score} title={score0.title} size={3}/>);
     }
     return (
       <div>
@@ -126,7 +127,7 @@ var Score = React.createClass({
   render() {
     return (
       <div className="score-block">
-        <CircularProgress mode="determinate" size={3} value={this.state.score} />
+        <CircularProgress mode="determinate" size={this.props.size} value={this.state.score} />
         <p className="label">{this.props.title}</p>
         <p className="score">{this.state.score}</p>
       </div>
