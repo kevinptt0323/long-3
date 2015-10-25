@@ -56,12 +56,12 @@ var ScorePanel = React.createClass({
     return (
       <div className="panel">
         <ScoreDown scores={[
-          { "score": 80, "title": "BMI" },
-          { "score": 60, "title": "Smoke" },
-          { "score": 50, "title": "Wine" },
-          { "score": 76, "title": "Sleep" },
-          { "score": 68, "title": "Exercise" },
-          { "score": 90, "title": "Vegetable" }
+          { "score": (Math.random()*20|0)+70, "title": "BMI" },
+          { "score": (Math.random()*20|0)+70, "title": "Smoke" },
+          { "score": (Math.random()*20|0)+70, "title": "Wine" },
+          { "score": (Math.random()*20|0)+70, "title": "Sleep" },
+          { "score": (Math.random()*20|0)+70, "title": "Exercise" },
+          { "score": (Math.random()*20|0)+70, "title": "Vegetable" }
         ]} />
       </div>
     );
